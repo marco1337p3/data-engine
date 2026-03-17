@@ -39,3 +39,23 @@ WITH avg_abv_by_style AS (
     WHERE ABV IS NOT NULL
 )
 SELECT * FROM avg_abv_by_style;
+
+SELECT 
+    B.NAME        AS beer_name,
+    B.ABV,
+    BR.NAME       AS brewery_name,
+    BR.STATE
+FROM BEER.PUBLIC.BEER B
+LEFT JOIN BEER.PUBLIC.BREWERIES BR ON B.BREWERY_ID = BR.ID
+WHERE BR.STATE like 'CA';
+
+SELECT 
+    BR.STATE,
+    COUNT(*)            AS number_of_beers,
+    ROUND(AVG(B.ABV), 2) AS avg_abv
+FROM BEER.PUBLIC.BEER B
+LEFT JOIN BEER.PUBLIC.BREWERIES BR ON B.BREWERY_ID = BR.ID
+WHERE B.ABV IS NOT NULL
+GROUP BY BR.STATE
+ORDER BY number_of_beers DESC
+LIMIT 5;
