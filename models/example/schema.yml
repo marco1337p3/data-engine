@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: stg_beers
+    columns:
+      - name: beer_id
+        tests:
+          - not_null
+          - unique
+      - name: beer_name
+        tests:
+          - not_null
+      - name: abv
+        tests:
+          - not_null
+
+  - name: stg_breweries
+    columns:
+      - name: brewery_id
+        tests:
+          - not_null
+          - unique
+      - name: brewery_name
+        tests:
+          - not_null
+
+  - name: mart_beers
+    columns:
+      - name: beer_id
+        tests:
+          - not_null
+          - unique
